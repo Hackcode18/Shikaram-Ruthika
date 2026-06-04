@@ -7,112 +7,262 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        html { 
+            scroll-behavior: smooth;
+            background: #F1F5F9;
+        }
         body { 
             overflow-x: hidden; 
-            background: #080D1A; 
-            color: #F7FAFC; 
+            background: #F1F5F9; 
+            color: #334155; 
             font-family: 'DM Sans', sans-serif; 
+            -webkit-font-smoothing: antialiased;
         }
         
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #080D1A; }
-        ::-webkit-scrollbar-thumb { background: #3B9EDB55; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3B9EDB; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F1F5F9; }
+        ::-webkit-scrollbar-thumb { background: rgba(226, 116, 137, 0.4); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #DB2777; }
 
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glow  { 0%,100% { opacity: .35; transform: scale(1); } 50% { opacity: .6; transform: scale(1.08); } }
+        @keyframes fadeUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        @keyframes glow { 
+            0%, 100% { opacity: 0.5; transform: scale(1) translate(0, 0); } 
+            50% { opacity: 0.7; transform: scale(1.08) translate(1%, 3%); } 
+        }
         @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+        @keyframes avatarFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes sketchWave {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-15deg); }
+        }
 
         .mono { font-family: 'JetBrains Mono', monospace; }
         .syne { font-family: 'Syne', sans-serif; }
         .dm { font-family: 'DM Sans', sans-serif; }
 
-        /* Backgrounds & Effects */
-        .hero-orb { animation: glow 4s ease-in-out infinite; border-radius: 50%; filter: blur(70px); position: absolute; pointer-events: none; }
+        /* Elegant Muted Pastel Background Elements */
+        .hero-orb { animation: glow 9s ease-in-out infinite; border-radius: 50%; filter: blur(90px); position: absolute; pointer-events: none; z-index: 0; }
         .grid-bg {
             background-image:
-                linear-gradient(rgba(59,158,219,.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59,158,219,.05) 1px, transparent 1px);
+                linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
             background-size: 52px 52px;
         }
 
-        /* Scroll Reveal Utility */
-        .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+        /* Fluid Floating Reveal System */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(35px); 
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1); 
+            will-change: transform, opacity;
+        }
         .reveal.vis { opacity: 1; transform: translateY(0); }
-        .reveal-d1 { transition-delay: .1s; }
-        .reveal-d2 { transition-delay: .2s; }
+        .reveal-d1 { transition-delay: .08s; }
+        .reveal-d2 { transition-delay: .16s; }
+        .reveal-d3 { transition-delay: .24s; }
 
-        /* Hover States */
-        .card-hover { transition: transform .25s ease, box-shadow .25s ease; }
-        .card-hover:hover { transform: translateY(-5px); }
-        .tag-pill { transition: transform .2s ease, background .2s ease; cursor: default; display: inline-block; }
-        .tag-pill:hover { transform: scale(1.06); }
+        /* Sophisticated Glassmorphic Off-White Cards */
+        .card-hover { 
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease; 
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 20px rgba(148, 163, 184, 0.06);
+        }
+        .card-hover:hover { 
+            transform: translateY(-5px); 
+            border-color: rgba(219, 39, 119, 0.2);
+            box-shadow: 0 16px 32px rgba(148, 163, 184, 0.12);
+        }
+        .tag-pill { transition: all .25s ease; cursor: default; display: inline-block; }
+        .tag-pill:hover { transform: translateY(-1px); background: rgba(219, 39, 119, 0.12) !important; }
 
-        /* Buttons */
-        .btn-primary, .btn-secondary { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border-radius: 10px; font-weight: 500; font-size: 14px; transition: all .25s ease; cursor: pointer; }
-        .btn-primary { background: #3B9EDB; color: #fff; padding: 12px 28px; border: none; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,158,219,.4); }
-        .btn-secondary { background: transparent; padding: 12px 22px; }
-        .btn-secondary.contact-btn { color: #F7FAFC; border: 1px solid rgba(255,255,255,.15); padding: 12px 28px; }
-        .btn-secondary.git-btn { color: #94A3B8; border: 1px solid rgba(255,255,255,.1); }
-        .btn-secondary:hover { background: rgba(59,158,219,.1); transform: translateY(-2px); }
+        /* Executive High-Contrast Buttons */
+        .btn-primary, .btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; border-radius: 10px; font-weight: 500; font-size: 14px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
+        .btn-primary { background: linear-gradient(135deg, #DB2777, #C026D3); color: #fff; padding: 13px 28px; border: none; box-shadow: 0 4px 15px rgba(219, 39, 119, 0.2); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(219, 39, 119, 0.35); }
+        .btn-secondary { background: rgba(255, 255, 255, 0.8); padding: 13px 24px; }
+        .btn-secondary.contact-btn { color: #1E293B; border: 1px solid rgba(148, 163, 184, 0.3); padding: 13px 28px; box-shadow: 0 2px 8px rgba(148, 163, 184, 0.04); }
+        .btn-secondary.git-btn { color: #475569; border: 1px solid rgba(148, 163, 184, 0.3); }
+        .btn-secondary:hover { background: rgba(219, 39, 119, 0.04); border-color: #DB2777; transform: translateY(-2px); color: #DB2777; }
 
-        /* Navigation */
+        /* Navigation Bar */
         #navbar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease;
             background: transparent;
             border-bottom: 1px solid transparent;
         }
         #navbar.nav-scrolled {
-            background: rgba(8, 13, 26, 0.95);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(59, 158, 219, 0.15);
+            background: rgba(241, 245, 249, 0.85);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            box-shadow: 0 2px 15px rgba(148, 163, 184, 0.04);
         }
-        .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-container { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 66px; display: flex; align-items: center; justify-content: space-between; }
         .nav-links { display: flex; gap: 28px; }
-        .nav-link { position: relative; transition: color .2s; font-size: 13px; font-weight: 500; color: #94A3B8; text-decoration: none; text-transform: capitalize; letter-spacing: .04em; }
-        .nav-link::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background: #3B9EDB; transition: width .3s ease; border-radius: 1px; }
+        .nav-link { position: relative; transition: color .2s; font-size: 13px; font-weight: 500; color: #475569; text-decoration: none; text-transform: capitalize; letter-spacing: .03em; }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #DB2777; transition: width .3s ease; border-radius: 1px; }
         .nav-link:hover::after, .nav-link.act::after { width: 100%; }
-        .nav-link.act { color: #3B9EDB !important; }
-        .nav-github { display: flex; align-items: center; gap: 6px; background: rgba(59,158,219,.12); border: 1px solid rgba(59,158,219,.25); border-radius: 8px; padding: 6px 14px; color: #3B9EDB; text-decoration: none; font-size: 13px; font-weight: 500; transition: all .25s ease;}
-        .nav-github:hover { background: rgba(59,158,219,.2); transform: translateY(-2px); }
+        .nav-link.act { color: #DB2777 !important; }
+        .nav-github { display: flex; align-items: center; gap: 6px; background: rgba(219, 39, 119, 0.05); border: 1px solid rgba(219, 39, 119, 0.18); border-radius: 8px; padding: 6px 14px; color: #DB2777; text-decoration: none; font-size: 13px; font-weight: 500; transition: all .25s ease;}
+        .nav-github:hover { background: rgba(219, 39, 119, 0.1); transform: translateY(-2px); }
 
-        /* Sections */
-        section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
-        .section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        /* Structure Layouts */
+        section { padding: 90px 24px; max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+        .section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
         .section-label-line { width: 28px; height: 2px; border-radius: 2px; }
-        .section-label-text { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
-        .section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 700; color: #F7FAFC; line-height: 1.2; margin-bottom: 48px; }
+        .section-label-text { font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
+        .section-title { font-size: clamp(26px, 4vw, 38px); font-weight: 700; color: #0F172A; line-height: 1.25; margin-bottom: 48px; letter-spacing: -0.01em; }
 
-        /* Cards */
-        .exp-card, .proj-card { background: rgba(255,255,255,.02); border-radius: 14px; padding: 22px; margin-bottom: 14px; }
-        .exp-card { border: 1px solid rgba(255,255,255,.07); transition: border-color .25s ease, box-shadow .25s ease; }
-        .exp-card:hover { border-color: rgba(59,158,219,.35) !important; box-shadow: 0 0 30px rgba(59,158,219,.07); }
-        .proj-card { transition: transform .25s ease, box-shadow .25s ease; border-radius: 16px; padding: 26px; display: flex; flex-direction: column; }
-        .proj-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,.4); }
+        .exp-card, .proj-card { border-radius: 14px; padding: 24px; margin-bottom: 16px; }
+        .proj-card { display: flex; flex-direction: column; height: 100%; }
 
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .flex-col { display: flex; flex-direction: column; gap: 16px; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .flex-col { display: flex; flex-direction: column; gap: 2px; }
+
+        /* Human Sketch Companion System (Persistent Float Placement) */
+        .companion-wrapper {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            align-items: flex-end;
+            gap: 16px;
+            z-index: 200;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sketch-bubble {
+            background: #FFFFFF;
+            border: 2px solid #1E293B;
+            border-radius: 14px;
+            padding: 12px 18px;
+            max-width: 260px;
+            color: #1E293B;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.5;
+            box-shadow: 0 10px 25px rgba(148, 163, 184, 0.15);
+            position: relative;
+            pointer-events: auto;
+            opacity: 0;
+            transform: translateY(10px) scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sketch-bubble.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .sketch-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: 16px;
+            right: -8px;
+            border-width: 8px 0 8px 8px;
+            border-style: solid;
+            border-color: transparent #FFFFFF;
+            display: block;
+            width: 0;
+        }
+        .sketch-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: 15px;
+            right: -10px;
+            border-width: 9px 0 9px 9px;
+            border-style: solid;
+            border-color: transparent #1E293B;
+            display: block;
+            width: 0;
+            z-index: -1;
+        }
+        .sketch-avatar {
+            width: 75px;
+            height: 75px;
+            background: #F1F5F9;
+            border: 2px solid #1E293B;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(148, 163, 184, 0.12);
+            pointer-events: auto;
+            cursor: pointer;
+            animation: avatarFloat 3.5s ease-in-out infinite;
+        }
+        .sketch-graphic {
+            width: 60px;
+            height: 60px;
+            transform-origin: bottom center;
+        }
+        .sketch-avatar:hover .sketch-graphic {
+            animation: sketchWave 0.6s ease-in-out infinite;
+        }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
+            section { padding: 65px 20px; }
+            .section-title { margin-bottom: 32px; }
+            .btn-primary, .btn-secondary { width: 100%; }
+            .hero-buttons { flex-direction: column; width: 100%; max-width: 320px; margin: 0 auto; }
+            .stat-box { padding: 0 12px !important; }
+            .companion-wrapper { bottom: 16px; right: 16px; gap: 8px; }
+            .sketch-bubble { max-width: 180px; font-size: 11px; padding: 10px 14px; }
+            .sketch-avatar { width: 55px; height: 55px; }
+            .sketch-graphic { width: 44px; height: 44px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Companion Sketch System -->
+    <div class="companion-wrapper" id="companionSpace">
+        <div class="sketch-bubble" id="commentBox">Hi! Welcome to my space! Space out or scroll down to check out my journey. 🌸</div>
+        <div class="sketch-avatar" onclick="triggerGreeting()">
+            <!-- Clean Artistic Hand-Drawn Minimalist Line Sketch Structure Vector -->
+            <svg class="sketch-graphic" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Hair Back/Outline Sketch Grid -->
+                <path d="M25 45C20 30 30 15 50 15C70 15 80 30 75 45" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Neck Sketch Lines -->
+                <path d="M43 65V75M57 65V75" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+                <!-- Face Oval Base Frame Contour -->
+                <path d="M32 42C32 58 40 68 50 68C60 68 68 58 68 42" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- Cute Human Minimalist Artistic Fine Eyes Sketch -->
+                <circle cx="43" cy="44" r="3" fill="#1E293B"/>
+                <circle cx="57" cy="44" r="3" fill="#1E293B"/>
+                <!-- Artistic Eyebrows strokes -->
+                <path d="M38 38C41 37 45 39 45 39" stroke="#1E293B" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M62 38C59 37 55 39 55 39" stroke="#1E293B" stroke-width="1.8" stroke-linecap="round"/>
+                <!-- Clean Smile Line Contour Shape -->
+                <path d="M45 54C47 57 53 57 55 54" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- Front Hair Bangs Sketch Details Layer -->
+                <path d="M31 40C33 26 44 24 48 28C52 24 66 25 69 39" stroke="#1E293B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M68 32C73 38 74 46 73 52" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+                <path d="M32 32C27 38 26 46 27 52" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Header Block -->
     <nav id="navbar">
         <div class="nav-container">
-            <span class="syne" style="font-size: 16px; font-weight: 700; color: #F7FAFC; letter-spacing: .02em;">
-                SR<span style="color: #3B9EDB;">.</span>
+            <span class="syne" style="font-size: 17px; font-weight: 700; color: #0F172A; letter-spacing: .02em;">
+                SR<span style="color: #DB2777;">.</span>
             </span>
             <div class="nav-links dm">
                 <a href="#about" class="nav-link">about</a>
@@ -129,31 +279,32 @@
         </div>
     </nav>
 
-    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding-top: 60px;" class="grid-bg">
-        <div class="hero-orb" style="width: 500px; height: 500px; background: rgba(59,158,219,.18); top: 10%; left: -10%; animation-delay: 0s;"></div>
-        <div class="hero-orb" style="width: 350px; height: 350px; background: rgba(167,139,250,.12); bottom: 15%; right: -5%; animation-delay: 2s;"></div>
-        <div class="hero-orb" style="width: 250px; height: 250px; background: rgba(246,173,85,.09); top: 55%; left: 55%; animation-delay: 1s;"></div>
+    <!-- Canvas Floating Hero Section -->
+    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding-top: 66px;" class="grid-bg" id="heroSpace">
+        <div class="hero-orb" style="width: 550px; height: 550px; background: rgba(251, 207, 232, 0.45); top: 5%; left: -5%;"></div>
+        <div class="hero-orb" style="width: 450px; height: 450px; background: rgba(254, 243, 199, 0.4); bottom: 10%; right: -5%; animation-delay: 2.5s;"></div>
+        <div class="hero-orb" style="width: 350px; height: 350px; background: rgba(250, 204, 251, 0.35); top: 40%; left: 40%; animation-delay: 1.2s;"></div>
 
-        <div style="max-width: 900px; margin: 0 auto; text-align: center; padding: 0 24px; position: relative; z-index: 1;">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center; padding: 0 24px; position: relative; z-index: 5;">
             
-            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(59,158,219,.1); border: 1px solid rgba(59,158,219,.25); border-radius: 100px; padding: 7px 18px; margin-bottom: 28px; animation: fadeUp .6s ease forwards;">
-                <div style="width: 7px; height: 7px; border-radius: 50%; background: #34D399; animation: blink 1.6s ease infinite;"></div>
-                <span class="dm" style="font-size: 12px; font-weight: 500; color: #3B9EDB; letter-spacing: .06em;">AVAILABLE · AMAZON ML SUMMER SCHOOL 2026 APPLICANT</span>
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(219, 39, 119, 0.05); border: 1px solid rgba(219, 39, 119, 0.15); border-radius: 100px; padding: 7px 18px; margin-bottom: 28px; animation: fadeUp .8s ease forwards;">
+                <div style="width: 6px; height: 6px; border-radius: 50%; background: #D97706; animation: blink 1.6s ease infinite;"></div>
+                <span class="dm" style="font-size: 11px; font-weight: 600; color: #BE185D; letter-spacing: .08em; text-transform: uppercase;">AMAZON ML SUMMER SCHOOL 2026 APPLICANT</span>
             </div>
 
-            <h1 class="syne" style="font-size: clamp(40px, 7vw, 76px); font-weight: 800; line-height: 1.05; margin-bottom: 20px; animation: fadeUp .7s .1s ease forwards; opacity: 0;">
+            <h1 class="syne" style="font-size: clamp(40px, 7vw, 74px); font-weight: 800; line-height: 1.05; margin-bottom: 20px; color: #0F172A; animation: fadeUp .9s .1s ease forwards; opacity: 0; letter-spacing: -0.02em;">
                 Shikaram<br/>
-                <span style="background: linear-gradient(135deg, #3B9EDB, #A78BFA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Ruthika</span>
+                <span style="background: linear-gradient(135deg, #DB2777, #D97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Ruthika</span>
             </h1>
 
-            <p class="dm" style="font-size: clamp(14px, 2vw, 18px); color: #94A3B8; font-weight: 300; line-height: 1.7; max-width: 620px; margin: 0 auto 16px; animation: fadeUp .7s .2s ease forwards; opacity: 0;">
+            <p class="dm" style="font-size: clamp(14px, 2vw, 18px); color: #475569; font-weight: 400; line-height: 1.65; max-width: 640px; margin: 0 auto 16px; animation: fadeUp .9s .2s ease forwards; opacity: 0;">
                 Machine Learning Engineer & Cloud AI Researcher
             </p>
-            <p class="mono" style="font-size: 13px; color: #4A6175; letter-spacing: .04em; margin-bottom: 40px; animation: fadeUp .7s .3s ease forwards; opacity: 0;">
-                B.Tech IT '27 · Incoming AWS SBCL · NIT Warangal Research · Google DevFest Winner
+            <p class="mono" style="font-size: 13px; color: #64748B; letter-spacing: .04em; font-weight: 500; margin-bottom: 40px; animation: fadeUp .9s .3s ease forwards; opacity: 0;">
+                B.Tech IT '27 · Incoming AWS SBCL · NIT Warangal Research · DevFest 2025
             </p>
 
-            <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; animation: fadeUp .7s .4s ease forwards; opacity: 0;">
+            <div class="hero-buttons" style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; animation: fadeUp .9s .4s ease forwards; opacity: 0;">
                 <a href="#projects" class="btn-primary dm">
                     View Work <i data-lucide="arrow-up-right" style="width: 15px; height: 15px;"></i>
                 </a>
@@ -165,482 +316,525 @@
                 </a>
             </div>
 
-            <div style="display: flex; gap: 0; justify-content: center; margin-top: 56px; animation: fadeUp .7s .5s ease forwards; opacity: 0;">
-                <div style="padding: 0 28px; border-right: 1px solid rgba(255,255,255,.07); text-align: center;">
-                    <div class="syne" style="font-size: 22px; font-weight: 700; color: #3B9EDB;">6+</div>
-                    <div class="dm" style="font-size: 11px; color: #566778; letter-spacing: .06em; text-transform: uppercase; margin-top: 2px;">Internships</div>
+            <div style="display: flex; gap: 0; justify-content: center; margin-top: 56px; animation: fadeUp .9s .5s ease forwards; opacity: 0;">
+                <div class="stat-box" style="padding: 0 28px; border-right: 1px solid rgba(148,163,184,.3); text-align: center;">
+                    <div class="syne" style="font-size: 22px; font-weight: 700; color: #DB2777;">6+</div>
+                    <div class="dm" style="font-size: 11px; color: #64748B; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; font-weight: 500;">Internships</div>
                 </div>
-                <div style="padding: 0 28px; border-right: 1px solid rgba(255,255,255,.07); text-align: center;">
-                    <div class="syne" style="font-size: 22px; font-weight: 700; color: #3B9EDB;">5+</div>
-                    <div class="dm" style="font-size: 11px; color: #566778; letter-spacing: .06em; text-transform: uppercase; margin-top: 2px;">ML Projects</div>
+                <div class="stat-box" style="padding: 0 28px; border-right: 1px solid rgba(148,163,184,.3); text-align: center;">
+                    <div class="syne" style="font-size: 22px; font-weight: 700; color: #DB2777;">5+</div>
+                    <div class="dm" style="font-size: 11px; color: #64748B; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; font-weight: 500;">ML Projects</div>
                 </div>
-                <div style="padding: 0 28px; border-right: 1px solid rgba(255,255,255,.07); text-align: center;">
-                    <div class="syne" style="font-size: 22px; font-weight: 700; color: #3B9EDB;">8.24</div>
-                    <div class="dm" style="font-size: 11px; color: #566778; letter-spacing: .06em; text-transform: uppercase; margin-top: 2px;">CGPA</div>
+                <div class="stat-box" style="padding: 0 28px; border-right: 1px solid rgba(148,163,184,.3); text-align: center;">
+                    <div class="syne" style="font-size: 22px; font-weight: 700; color: #DB2777;">8.24</div>
+                    <div class="dm" style="font-size: 11px; color: #64748B; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; font-weight: 500;">CGPA</div>
                 </div>
-                <div style="padding: 0 28px; text-align: center;">
-                    <div class="syne" style="font-size: 22px; font-weight: 700; color: #3B9EDB;">2025</div>
-                    <div class="dm" style="font-size: 11px; color: #566778; letter-spacing: .06em; text-transform: uppercase; margin-top: 2px;">DevFest Win</div>
+                <div class="stat-box" style="padding: 0 28px; text-align: center;">
+                    <div class="syne" style="font-size: 22px; font-weight: 700; color: #DB2777;">2025</div>
+                    <div class="dm" style="font-size: 11px; color: #64748B; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; font-weight: 500;">DevFest</div>
                 </div>
             </div>
         </div>
 
-        <div style="position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); animation: glow 2s ease-in-out infinite;">
-            <i data-lucide="chevron-down" style="width: 20px; height: 20px; color: #3B9EDB88;"></i>
+        <div style="position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); opacity: 0.6;">
+            <i data-lucide="chevron-down" style="width: 20px; height: 20px; color: #DB2777;"></i>
         </div>
     </div>
 
+    <!-- About Section -->
     <section id="about">
         <div class="reveal dm section-label">
-            <div class="section-label-line" style="background: #3B9EDB;"></div>
-            <span class="section-label-text" style="color: #3B9EDB;">About Me</span>
+            <div class="section-label-line" style="background: #DB2777;"></div>
+            <span class="section-label-text" style="color: #DB2777;">About Me</span>
         </div>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center;">
             <div>
-                <h2 class="reveal syne section-title" style="margin-bottom: 24px;">Building Intelligence,<br/>One Model at a Time</h2>
-                <p class="dm reveal reveal-d1" style="color: #94A3B8; line-height: 1.8; font-size: 15px;">
+                <h2 class="reveal syne section-title" style="margin-bottom: 20px;">Building Intelligence,<br/>One Model at a Time</h2>
+                <p class="dm reveal reveal-d1" style="color: #475569; line-height: 1.75; font-size: 15px; font-weight: 400;">
                     B.Tech IT student (2027) with hands-on experience across Machine Learning, Deep Learning, NLP, and Cloud AI (AWS / Azure / GCP). Incoming AWS Student Builder Community Lead. Research intern at NIT Warangal, Project Lead at IBM, and Google DevFest 2025 Winner. I build production-grade RAG systems, agentic AI platforms, and NLP pipelines — combining research rigour with full-stack execution.
                 </p>
                 <div class="reveal reveal-d2" style="display: flex; gap: 16px; margin-top: 28px; flex-wrap: wrap;">
-                    <div class="dm" style="display: flex; align-items: center; gap: 8px; color: #566778; font-size: 13px;">
-                        <span style="color: #3B9EDB;"><i data-lucide="map-pin" style="width: 14px; height: 14px;"></i></span> Hanamkonda, Telangana, India
+                    <div class="dm" style="display: flex; align-items: center; gap: 8px; color: #475569; font-size: 13px; font-weight: 500;">
+                        <span style="color: #DB2777;"><i data-lucide="map-pin" style="width: 14px; height: 14px;"></i></span> Hanamkonda, Telangana, India
                     </div>
-                    <div class="dm" style="display: flex; align-items: center; gap: 8px; color: #566778; font-size: 13px;">
-                        <span style="color: #3B9EDB;"><i data-lucide="mail" style="width: 14px; height: 14px;"></i></span> shikaramruthika@gmail.com
+                    <div class="dm" style="display: flex; align-items: center; gap: 8px; color: #475569; font-size: 13px; font-weight: 500;">
+                        <span style="color: #DB2777;"><i data-lucide="mail" style="width: 14px; height: 14px;"></i></span> shikaramruthika@gmail.com
                     </div>
-                    <div class="dm" style="display: flex; align-items: center; gap: 8px; color: #566778; font-size: 13px;">
-                        <span style="color: #3B9EDB;"><i data-lucide="phone" style="width: 14px; height: 14px;"></i></span> +91-9059706443
+                    <div class="dm" style="display: flex; align-items: center; gap: 8px; color: #475569; font-size: 13px; font-weight: 500;">
+                        <span style="color: #DB2777;"><i data-lucide="phone" style="width: 14px; height: 14px;"></i></span> +91-9059706443
                     </div>
                 </div>
             </div>
             
-            <div class="reveal reveal-d1 card-hover" style="background: rgba(59,158,219,.04); border: 1px solid rgba(59,158,219,.12); border-radius: 16px; padding: 28px;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.05); gap: 12px;">
-                    <span class="dm" style="font-size: 12px; color: #566778; font-weight: 500; min-width: 110px;">Current Focus</span>
-                    <span class="dm" style="font-size: 13px; color: #F6AD55; font-weight: 500; text-align: right; line-height: 1.4;">Amazon ML Summer School 2026</span>
+            <div class="reveal reveal-d1 card-hover" style="border-radius: 16px; padding: 28px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(148,163,184,0.12); gap: 12px;">
+                    <span class="dm" style="font-size: 12px; color: #64748B; font-weight: 600; min-width: 110px;">Current Focus</span>
+                    <span class="dm" style="font-size: 13px; color: #D97706; font-weight: 600; text-align: right; line-height: 1.4;">Amazon ML Summer School 2026</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.05); gap: 12px;">
-                    <span class="dm" style="font-size: 12px; color: #566778; font-weight: 500; min-width: 110px;">Research</span>
-                    <span class="dm" style="font-size: 13px; color: #A78BFA; font-weight: 500; text-align: right; line-height: 1.4;">NIT Warangal · Multilingual TTS / AIoT</span>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(148,163,184,0.12); gap: 12px;">
+                    <span class="dm" style="font-size: 12px; color: #64748B; font-weight: 600; min-width: 110px;">Research</span>
+                    <span class="dm" style="font-size: 13px; color: #9D174D; font-weight: 600; text-align: right; line-height: 1.4;">NIT Warangal · Multilingual TTS</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.05); gap: 12px;">
-                    <span class="dm" style="font-size: 12px; color: #566778; font-weight: 500; min-width: 110px;">Upcoming Role</span>
-                    <span class="dm" style="font-size: 13px; color: #34D399; font-weight: 500; text-align: right; line-height: 1.4;">AWS Student Builder Community Lead</span>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(148,163,184,0.12); gap: 12px;">
+                    <span class="dm" style="font-size: 12px; color: #64748B; font-weight: 600; min-width: 110px;">Upcoming Role</span>
+                    <span class="dm" style="font-size: 13px; color: #047857; font-weight: 600; text-align: right; line-height: 1.4;">AWS Student Builder Community Lead</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.05); gap: 12px;">
-                    <span class="dm" style="font-size: 12px; color: #566778; font-weight: 500; min-width: 110px;">Top Skill</span>
-                    <span class="dm" style="font-size: 13px; color: #3B9EDB; font-weight: 500; text-align: right; line-height: 1.4;">Machine Learning · Python · RAG Systems</span>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(148,163,184,0.12); gap: 12px;">
+                    <span class="dm" style="font-size: 12px; color: #64748B; font-weight: 600; min-width: 110px;">Top Skill</span>
+                    <span class="dm" style="font-size: 13px; color: #DB2777; font-weight: 600; text-align: right; line-height: 1.4;">Machine Learning · RAG Systems</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; gap: 12px;">
-                    <span class="dm" style="font-size: 12px; color: #566778; font-weight: 500; min-width: 110px;">Open For</span>
-                    <span class="dm" style="font-size: 13px; color: #FC8181; font-weight: 500; text-align: right; line-height: 1.4;">ML Research · Internships · Collaborations</span>
+                    <span class="dm" style="font-size: 12px; color: #64748B; font-weight: 600; min-width: 110px;">Open For</span>
+                    <span class="dm" style="font-size: 13px; color: #DB2777; font-weight: 600; text-align: right; line-height: 1.4;">ML Research & Internships</span>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Education Section -->
     <section id="education" style="padding-top: 0;">
         <div class="reveal dm section-label">
-            <div class="section-label-line" style="background: #3B9EDB;"></div>
-            <span class="section-label-text" style="color: #3B9EDB;">Education</span>
+            <div class="section-label-line" style="background: #DB2777;"></div>
+            <span class="section-label-text" style="color: #DB2777;">Education</span>
         </div>
         <h2 class="reveal syne section-title">Academic Background</h2>
         
         <div class="flex-col">
-            <div class="reveal reveal-d1 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(59,158,219,.3); border-radius: 14px; padding: 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <div class="reveal reveal-d1 card-hover" style="border: 1px solid rgba(219, 39, 119, 0.15); border-radius: 14px; padding: 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
                 <div>
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-                        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: #F7FAFC;">B.Tech — Information Technology</h3>
-                        <span class="dm" style="font-size: 10px; font-weight: 600; color: #34D399; background: rgba(52,211,153,.12); border: 1px solid rgba(52,211,153,.25); border-radius: 100px; padding: 2px 10px; letter-spacing: .08em;">CURRENT</span>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap;">
+                        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: #0F172A;">B.Tech — Information Technology</h3>
+                        <span class="dm" style="font-size: 10px; font-weight: 600; color: #047857; background: rgba(4,120,87,0.06); border: 1px solid rgba(4,120,87,0.2); border-radius: 100px; padding: 2px 10px; letter-spacing: .08em;">CURRENT</span>
                     </div>
-                    <p class="dm" style="color: #566778; font-size: 13px;">Kakatiya Institute of Technology and Science (KITS), Warangal</p>
+                    <p class="dm" style="color: #475569; font-size: 13px; font-weight: 500;">Kakatiya Institute of Technology and Science (KITS), Warangal</p>
                 </div>
-                <div style="text-align: right;">
-                    <div class="syne" style="font-size: 20px; font-weight: 700; color: #3B9EDB;">CGPA: 8.24</div>
-                    <div class="mono" style="font-size: 12px; color: #4A6175; margin-top: 2px;">2023 – 2027</div>
+                <div style="text-align: right; min-width: 120px;">
+                    <div class="syne" style="font-size: 19px; font-weight: 700; color: #DB2777;">CGPA: 8.24</div>
+                    <div class="mono" style="font-size: 12px; color: #64748B; margin-top: 2px;">2023 – 2027</div>
                 </div>
             </div>
 
-            <div class="reveal reveal-d2 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <div class="reveal reveal-d2 card-hover" style="border-radius: 14px; padding: 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
                 <div>
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-                        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: #F7FAFC;">Intermediate — MPC</h3>
+                        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: #0F172A;">Intermediate — MPC</h3>
                     </div>
-                    <p class="dm" style="color: #566778; font-size: 13px;">SR Junior College for Girls, Warangal</p>
+                    <p class="dm" style="color: #475569; font-size: 13px; font-weight: 500;">SR Junior College for Girls, Warangal</p>
                 </div>
-                <div style="text-align: right;">
-                    <div class="syne" style="font-size: 20px; font-weight: 700; color: #3B9EDB;">93%</div>
-                    <div class="mono" style="font-size: 12px; color: #4A6175; margin-top: 2px;">2021 – 2023</div>
+                <div style="text-align: right; min-width: 120px;">
+                    <div class="syne" style="font-size: 19px; font-weight: 700; color: #DB2777;">93%</div>
+                    <div class="mono" style="font-size: 12px; color: #64748B; margin-top: 2px;">2021 – 2023</div>
                 </div>
             </div>
 
-            <div class="reveal reveal-d3 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <div class="reveal reveal-d3 card-hover" style="border-radius: 14px; padding: 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
                 <div>
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-                        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: #F7FAFC;">Secondary School Certificate (Class X)</h3>
+                        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: #0F172A;">Secondary School Certificate (Class X)</h3>
                     </div>
-                    <p class="dm" style="color: #566778; font-size: 13px;">St. Peter's Central Public School, Warangal</p>
+                    <p class="dm" style="color: #475569; font-size: 13px; font-weight: 500;">St. Peter's Central Public School, Warangal</p>
                 </div>
-                <div style="text-align: right;">
-                    <div class="syne" style="font-size: 20px; font-weight: 700; color: #3B9EDB;">82%</div>
-                    <div class="mono" style="font-size: 12px; color: #4A6175; margin-top: 2px;">2021</div>
+                <div style="text-align: right; min-width: 120px;">
+                    <div class="syne" style="font-size: 19px; font-weight: 700; color: #DB2777;">82%</div>
+                    <div class="mono" style="font-size: 12px; color: #64748B; margin-top: 2px;">2021</div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Technical Skills Section -->
     <section id="skills" style="padding-top: 0;">
         <div class="reveal dm section-label">
-            <div class="section-label-line" style="background: #3B9EDB;"></div>
-            <span class="section-label-text" style="color: #3B9EDB;">Technical Skills</span>
+            <div class="section-label-line" style="background: #DB2777;"></div>
+            <span class="section-label-text" style="color: #DB2777;">Technical Skills</span>
         </div>
         <h2 class="reveal syne section-title">What I Work With</h2>
         
         <div class="grid-container">
-            <div class="reveal reveal-d1 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 22px;">
+            <div class="reveal reveal-d1 card-hover" style="border-radius: 14px; padding: 22px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
                     <span style="font-size: 18px;">🧠</span>
-                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #3B9EDB;">Core ML</span>
+                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #DB2777;">Core ML</span>
                 </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 7px;">
-                    <span class="tag-pill dm" style="font-size: 12px; color: #3B9EDB; background: #3B9EDB14; border: 1px solid #3B9EDB30; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Machine Learning Fundamentals</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #3B9EDB; background: #3B9EDB14; border: 1px solid #3B9EDB30; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Probability</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #3B9EDB; background: #3B9EDB14; border: 1px solid #3B9EDB30; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Statistics</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #3B9EDB; background: #3B9EDB14; border: 1px solid #3B9EDB30; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Linear Algebra</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span class="tag-pill dm" style="font-size: 12px; color: #DB2777; background: rgba(219,39,119,0.05); border: 1px solid rgba(219,39,119,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Machine Learning Fundamentals</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #DB2777; background: rgba(219,39,119,0.05); border: 1px solid rgba(219,39,119,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Probability & Statistics</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #DB2777; background: rgba(219,39,119,0.05); border: 1px solid rgba(219,39,119,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Linear Algebra</span>
                 </div>
             </div>
 
-            <div class="reveal reveal-d2 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 22px;">
+            <div class="reveal reveal-d2 card-hover" style="border-radius: 14px; padding: 22px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
                     <span style="font-size: 18px;">⚡</span>
-                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #A78BFA;">ML / AI</span>
+                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #92140C;">ML / AI</span>
                 </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 7px;">
-                    <span class="tag-pill dm" style="font-size: 12px; color: #A78BFA; background: #A78BFA14; border: 1px solid #A78BFA30; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Deep Learning</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #A78BFA; background: #A78BFA14; border: 1px solid #A78BFA30; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Generative AI</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #A78BFA; background: #A78BFA14; border: 1px solid #A78BFA30; border-radius: 100px; padding: 4px 12px; font-weight: 500;">LLMs</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #A78BFA; background: #A78BFA14; border: 1px solid #A78BFA30; border-radius: 100px; padding: 4px 12px; font-weight: 500;">RAG Systems</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #A78BFA; background: #A78BFA14; border: 1px solid #A78BFA30; border-radius: 100px; padding: 4px 12px; font-weight: 500;">NLP</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span class="tag-pill dm" style="font-size: 12px; color: #92140C; background: rgba(146,20,12,0.04); border: 1px solid rgba(146,20,12,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Deep Learning</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #92140C; background: rgba(146,20,12,0.04); border: 1px solid rgba(146,20,12,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Generative AI</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #92140C; background: rgba(146,20,12,0.04); border: 1px solid rgba(146,20,12,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">LLMs</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #92140C; background: rgba(146,20,12,0.04); border: 1px solid rgba(146,20,12,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">RAG Systems</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #92140C; background: rgba(146,20,12,0.04); border: 1px solid rgba(146,20,12,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">NLP</span>
                 </div>
             </div>
 
-            <div class="reveal reveal-d3 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 22px;">
+            <div class="reveal reveal-d3 card-hover" style="border-radius: 14px; padding: 22px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
                     <span style="font-size: 18px;">🔧</span>
-                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #34D399;">Frameworks</span>
+                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #047857;">Frameworks</span>
                 </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 7px;">
-                    <span class="tag-pill dm" style="font-size: 12px; color: #34D399; background: #34D39914; border: 1px solid #34D39930; border-radius: 100px; padding: 4px 12px; font-weight: 500;">TensorFlow</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #34D399; background: #34D39914; border: 1px solid #34D39930; border-radius: 100px; padding: 4px 12px; font-weight: 500;">PyTorch</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #34D399; background: #34D39914; border: 1px solid #34D39930; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Scikit-learn</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #34D399; background: #34D39914; border: 1px solid #34D39930; border-radius: 100px; padding: 4px 12px; font-weight: 500;">LangChain</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span class="tag-pill dm" style="font-size: 12px; color: #047857; background: rgba(4,120,87,0.04); border: 1px solid rgba(4,120,87,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">TensorFlow</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #047857; background: rgba(4,120,87,0.04); border: 1px solid rgba(4,120,87,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">PyTorch</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #047857; background: rgba(4,120,87,0.04); border: 1px solid rgba(4,120,87,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Scikit-learn</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #047857; background: rgba(4,120,87,0.04); border: 1px solid rgba(4,120,87,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">LangChain</span>
                 </div>
             </div>
 
-            <div class="reveal reveal-d1 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 22px;">
+            <div class="reveal reveal-d1 card-hover" style="border-radius: 14px; padding: 22px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
                     <span style="font-size: 18px;">☁️</span>
-                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #F6AD55;">Cloud</span>
+                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #D97706;">Cloud</span>
                 </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 7px;">
-                    <span class="tag-pill dm" style="font-size: 12px; color: #F6AD55; background: #F6AD5514; border: 1px solid #F6AD5530; border-radius: 100px; padding: 4px 12px; font-weight: 500;">AWS SageMaker</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #F6AD55; background: #F6AD5514; border: 1px solid #F6AD5530; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Azure AI Services</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #F6AD55; background: #F6AD5514; border: 1px solid #F6AD5530; border-radius: 100px; padding: 4px 12px; font-weight: 500;">GCP Vertex AI</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #F6AD55; background: #F6AD5514; border: 1px solid #F6AD5530; border-radius: 100px; padding: 4px 12px; font-weight: 500;">IaC (Bicep)</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span class="tag-pill dm" style="font-size: 12px; color: #D97706; background: rgba(217,119,6,0.04); border: 1px solid rgba(217,119,6,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">AWS SageMaker</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #D97706; background: rgba(217,119,6,0.04); border: 1px solid rgba(217,119,6,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Azure AI Services</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #D97706; background: rgba(217,119,6,0.04); border: 1px solid rgba(217,119,6,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">GCP Vertex AI</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #D97706; background: rgba(217,119,6,0.04); border: 1px solid rgba(217,119,6,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">IaC (Bicep)</span>
                 </div>
             </div>
             
-            <div class="reveal reveal-d2 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 22px;">
+            <div class="reveal reveal-d2 card-hover" style="border-radius: 14px; padding: 22px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
                     <span style="font-size: 18px;">💻</span>
-                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #FC8181;">Languages</span>
+                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #DB2777;">Languages</span>
                 </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 7px;">
-                    <span class="tag-pill dm" style="font-size: 12px; color: #FC8181; background: #FC818114; border: 1px solid #FC818130; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Python</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #FC8181; background: #FC818114; border: 1px solid #FC818130; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Java</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #FC8181; background: #FC818114; border: 1px solid #FC818130; border-radius: 100px; padding: 4px 12px; font-weight: 500;">SQL</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #FC8181; background: #FC818114; border: 1px solid #FC818130; border-radius: 100px; padding: 4px 12px; font-weight: 500;">JavaScript</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span class="tag-pill dm" style="font-size: 12px; color: #DB2777; background: rgba(219,39,119,0.04); border: 1px solid rgba(219,39,119,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Python</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #DB2777; background: rgba(219,39,119,0.04); border: 1px solid rgba(219,39,119,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Java</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #DB2777; background: rgba(219,39,119,0.04); border: 1px solid rgba(219,39,119,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">SQL</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #DB2777; background: rgba(219,39,119,0.04); border: 1px solid rgba(219,39,119,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">JavaScript</span>
                 </div>
             </div>
 
-            <div class="reveal reveal-d3 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 22px;">
+            <div class="reveal reveal-d3 card-hover" style="border-radius: 14px; padding: 22px;">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
                     <span style="font-size: 18px;">🛠️</span>
-                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #67E8F9;">Tools</span>
+                    <span class="syne" style="font-size: 14px; font-weight: 700; color: #0284C7;">Tools</span>
                 </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 7px;">
-                    <span class="tag-pill dm" style="font-size: 12px; color: #67E8F9; background: #67E8F914; border: 1px solid #67E8F930; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Git / GitHub</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #67E8F9; background: #67E8F914; border: 1px solid #67E8F930; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Postman</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #67E8F9; background: #67E8F914; border: 1px solid #67E8F930; border-radius: 100px; padding: 4px 12px; font-weight: 500;">Jupyter</span>
-                    <span class="tag-pill dm" style="font-size: 12px; color: #67E8F9; background: #67E8F914; border: 1px solid #67E8F930; border-radius: 100px; padding: 4px 12px; font-weight: 500;">VS Code</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span class="tag-pill dm" style="font-size: 12px; color: #0284C7; background: rgba(2,132,199,0.04); border: 1px solid rgba(2,132,199,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Git / GitHub</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #0284C7; background: rgba(2,132,199,0.04); border: 1px solid rgba(2,132,199,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Postman</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #0284C7; background: rgba(2,132,199,0.04); border: 1px solid rgba(2,132,199,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">Jupyter</span>
+                    <span class="tag-pill dm" style="font-size: 12px; color: #0284C7; background: rgba(2,132,199,0.04); border: 1px solid rgba(2,132,199,0.15); border-radius: 100px; padding: 4px 12px; font-weight: 500;">VS Code</span>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Experience Timeline Section -->
     <section id="experience" style="padding-top: 0;">
         <div class="reveal dm section-label">
-            <div class="section-label-line" style="background: #3B9EDB;"></div>
-            <span class="section-label-text" style="color: #3B9EDB;">Experience</span>
+            <div class="section-label-line" style="background: #DB2777;"></div>
+            <span class="section-label-text" style="color: #DB2777;">Experience</span>
         </div>
         <h2 class="reveal syne section-title">Internship Timeline</h2>
         
         <div class="flex-col">
-            <div class="reveal exp-card card-hover">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+            <div class="reveal exp-card card-hover" id="exp-aws">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
                     <div>
                         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px;">
-                            <h3 class="syne" style="font-size: 15px; font-weight: 700; color: #F7FAFC;">Incoming: AWS Student Builder Community Lead (SBCL)</h3>
-                            <span class="dm" style="font-size: 10px; font-weight: 600; color: #F6AD55; background: #F6AD5518; border: 1px solid #F6AD5535; border-radius: 100px; padding: 2px 10px; letter-spacing: .08em;">INCOMING</span>
+                            <h3 class="syne" style="font-size: 15px; font-weight: 700; color: #0F172A;">Incoming: AWS Student Builder Community Lead (SBCL)</h3>
+                            <span class="dm" style="font-size: 10px; font-weight: 600; color: #D97706; background: rgba(217,119,6,0.06); border: 1px solid rgba(217,119,6,0.2); border-radius: 100px; padding: 2px 10px; letter-spacing: .08em;">INCOMING</span>
                         </div>
-                        <span class="dm" style="font-size: 13px; color: #566778;">Amazon Web Services</span>
+                        <span class="dm" style="font-size: 13px; color: #475569; font-weight: 500;">Amazon Web Services</span>
                     </div>
-                    <span class="mono" style="font-size: 12px; color: #4A6175; white-space: nowrap;">Jul 27 – Sep 7, 2026</span>
+                    <span class="mono" style="font-size: 12px; color: #64748B; white-space: nowrap; font-weight: 500;">Jul 27 – Sep 7, 2026</span>
                 </div>
                 <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 6px;">
-                    <li class="dm" style="font-size: 13px; color: #94A3B8; line-height: 1.65; display: flex; gap: 10px;">
-                        <span style="color: #F6AD55; margin-top: 4px; flex-shrink: 0;">▸</span>Selected to lead AWS student-builder communities; drive cloud adoption and run AI/ML workshops on SageMaker, Bedrock, and serverless ML pipelines.
+                    <li class="dm" style="font-size: 13px; color: #475569; line-height: 1.65; display: flex; gap: 10px;">
+                        <span style="color: #D97706; margin-top: 4px; flex-shrink: 0;">▸</span>Selected to lead AWS student-builder communities; drive cloud adoption and run AI/ML workshops on SageMaker, Bedrock, and serverless ML pipelines.
                     </li>
                 </ul>
             </div>
 
-            <div class="reveal exp-card card-hover">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+            <div class="reveal exp-card card-hover" id="exp-nit">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
                     <div>
                         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px;">
-                            <h3 class="syne" style="font-size: 15px; font-weight: 700; color: #F7FAFC;">Research Intern — AIoT & Applications</h3>
-                            <span class="dm" style="font-size: 10px; font-weight: 600; color: #A78BFA; background: #A78BFA18; border: 1px solid #A78BFA35; border-radius: 100px; padding: 2px 10px; letter-spacing: .08em;">RESEARCH</span>
+                            <h3 class="syne" style="font-size: 15px; font-weight: 700; color: #0F172A;">Research Intern — AIoT & Applications</h3>
+                            <span class="dm" style="font-size: 10px; font-weight: 600; color: #92140C; background: rgba(146,20,12,0.06); border: 1px solid rgba(146,20,12,0.2); border-radius: 100px; padding: 2px 10px; letter-spacing: .08em;">RESEARCH</span>
                         </div>
-                        <span class="dm" style="font-size: 13px; color: #566778;">NIT Warangal</span>
+                        <span class="dm" style="font-size: 13px; color: #475569; font-weight: 500;">NIT Warangal</span>
                     </div>
-                    <span class="mono" style="font-size: 12px; color: #4A6175; white-space: nowrap;">May – Jun 2025</span>
+                    <span class="mono" style="font-size: 12px; color: #64748B; white-space: nowrap; font-weight: 500;">May – Jun 2025</span>
                 </div>
                 <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 6px;">
-                    <li class="dm" style="font-size: 13px; color: #94A3B8; line-height: 1.65; display: flex; gap: 10px;">
-                        <span style="color: #A78BFA; margin-top: 4px; flex-shrink: 0;">▸</span>Contributed NLP pipeline design and benchmarking for Multilingual TTS research; co-authored findings on synthesis accuracy across Indian language datasets.
+                    <li class="dm" style="font-size: 13px; color: #475569; line-height: 1.65; display: flex; gap: 10px;">
+                        <span style="color: #92140C; margin-top: 4px; flex-shrink: 0;">▸</span>Contributed NLP pipeline design and benchmarking for Multilingual TTS research; co-authored findings on synthesis accuracy across Indian language datasets.
                     </li>
                 </ul>
             </div>
 
-            <div class="reveal exp-card card-hover">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+            <div class="reveal exp-card card-hover" id="exp-msft">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
                     <div>
                         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px;">
-                            <h3 class="syne" style="font-size: 15px; font-weight: 700; color: #F7FAFC;">Microsoft Elevate Intern</h3>
-                            <span class="dm" style="font-size: 10px; font-weight: 600; color: #3B9EDB; background: #3B9EDB18; border: 1px solid #3B9EDB35; border-radius: 100px; padding: 2px 10px; letter-spacing: .08em;">ML + CLOUD</span>
+                            <h3 class="syne" style="font-size: 15px; font-weight: 700; color: #0F172A;">Microsoft Elevate Intern</h3>
+                            <span class="dm" style="font-size: 10px; font-weight: 600; color: #DB2777; background: rgba(219,39,119,0.06); border: 1px solid rgba(219,39,119,0.2); border-radius: 100px; padding: 2px 10px; letter-spacing: .08em;">ML + CLOUD</span>
                         </div>
-                        <span class="dm" style="font-size: 13px; color: #566778;">Microsoft / AICTE</span>
+                        <span class="dm" style="font-size: 13px; color: #475569; font-weight: 500;">Microsoft / AICTE</span>
                     </div>
-                    <span class="mono" style="font-size: 12px; color: #4A6175; white-space: nowrap;">Dec 2025 – Jan 2026</span>
+                    <span class="mono" style="font-size: 12px; color: #64748B; white-space: nowrap; font-weight: 500;">Dec 2025 – Jan 2026</span>
                 </div>
                 <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 6px;">
-                    <li class="dm" style="font-size: 13px; color: #94A3B8; line-height: 1.65; display: flex; gap: 10px;">
-                        <span style="color: #3B9EDB; margin-top: 4px; flex-shrink: 0;">▸</span>Deployed Azure AI Studio solutions with Responsible AI guardrails; gained enterprise experience in Azure ML, Cognitive Services, and cloud-native AI.
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="reveal exp-card card-hover">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
-                    <div>
-                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px;">
-                            <h3 class="syne" style="font-size: 15px; font-weight: 700; color: #F7FAFC;">Cloud Technology Intern</h3>
-                            <span class="dm" style="font-size: 10px; font-weight: 600; color: #67E8F9; background: #67E8F918; border: 1px solid #67E8F935; border-radius: 100px; padding: 2px 10px; letter-spacing: .08em;">CLOUD</span>
-                        </div>
-                        <span class="dm" style="font-size: 13px; color: #566778;">CODETECH IT Solutions</span>
-                    </div>
-                    <span class="mono" style="font-size: 12px; color: #4A6175; white-space: nowrap;">Jan – Mar 2025</span>
-                </div>
-                <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 6px;">
-                    <li class="dm" style="font-size: 13px; color: #94A3B8; line-height: 1.65; display: flex; gap: 10px;">
-                        <span style="color: #67E8F9; margin-top: 4px; flex-shrink: 0;">▸</span>Implemented multi-cloud infrastructure using Bicep (IaC) on Azure; automated deployment pipelines and enforced cloud-security policies.
+                    <li class="dm" style="font-size: 13px; color: #475569; line-height: 1.65; display: flex; gap: 10px;">
+                        <span style="color: #DB2777; margin-top: 4px; flex-shrink: 0;">▸</span>Deployed Azure AI Studio solutions with Responsible AI guardrails; gained enterprise experience in Azure ML, Cognitive Services, and cloud-native AI.
                     </li>
                 </ul>
             </div>
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section id="projects" style="padding-top: 0;">
         <div class="reveal dm section-label">
-            <div class="section-label-line" style="background: #3B9EDB;"></div>
-            <span class="section-label-text" style="color: #3B9EDB;">Projects</span>
+            <div class="section-label-line" style="background: #DB2777;"></div>
+            <span class="section-label-text" style="color: #DB2777;">Projects</span>
         </div>
         <h2 class="reveal syne section-title">Work Samples</h2>
         
-        <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
-            <div class="reveal proj-card" style="border: 1px solid #3B9EDB22;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+        <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));">
+            <div class="reveal proj-card card-hover" style="border: 1px solid rgba(219,39,119,0.12);" id="proj-h2o">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
                     <div>
-                        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: #F7FAFC; margin-bottom: 3px;">H2O Guardian</h3>
-                        <p class="dm" style="font-size: 12px; color: #3B9EDB; font-weight: 500;">AI-Powered RAG System</p>
+                        <h3 class="syne" style="font-size: 17px; font-weight: 700; color: #0F172A; margin-bottom: 4px;">H2O Guardian</h3>
+                        <p class="dm" style="font-size: 12px; color: #DB2777; font-weight: 600;">AI-Powered RAG System</p>
                     </div>
-                    <a href="https://github.com/Hackcode18" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: #3B9EDB14; border: 1px solid #3B9EDB30; border-radius: 8px; color: #3B9EDB; flex-shrink: 0;">
+                    <a href="https://github.com/Hackcode18" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(219,39,119,0.04); border: 1px solid rgba(219,39,119,0.18); border-radius: 10px; color: #DB2777; flex-shrink: 0;">
                         <i data-lucide="github" style="width: 15px; height: 15px;"></i>
                     </a>
                 </div>
-                <p class="dm" style="font-size: 13px; color: #94A3B8; line-height: 1.7; flex-grow: 1; margin-bottom: 18px;">
+                <p class="dm" style="font-size: 13px; color: #475569; line-height: 1.7; flex-grow: 1; margin-bottom: 20px; font-weight: 400;">
                     Led IBM Watson-based RAG system for water-resource management with real-time data pipelines, vector-store indexing, and semantic retrieval.
                 </p>
                 <div style="margin-bottom: 16px;">
-                    <span class="dm" style="font-size: 11px; color: #566778;">IBM · Project Lead</span>
+                    <span class="dm" style="font-size: 11px; color: #64748B; font-weight: 500;">IBM · Project Lead</span>
                 </div>
                 <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-                    <span class="dm" style="font-size: 11px; color: #3B9EDB; background: #3B9EDB10; border: 1px solid #3B9EDB25; border-radius: 6px; padding: 3px 10px; font-weight: 500;">RAG</span>
-                    <span class="dm" style="font-size: 11px; color: #3B9EDB; background: #3B9EDB10; border: 1px solid #3B9EDB25; border-radius: 6px; padding: 3px 10px; font-weight: 500;">IBM Watson</span>
-                    <span class="dm" style="font-size: 11px; color: #3B9EDB; background: #3B9EDB10; border: 1px solid #3B9EDB25; border-radius: 6px; padding: 3px 10px; font-weight: 500;">Python</span>
+                    <span class="dm" style="font-size: 11px; color: #DB2777; background: rgba(219,39,119,0.05); border: 1px solid rgba(219,39,119,0.15); border-radius: 6px; padding: 4px 12px; font-weight: 500;">RAG</span>
+                    <span class="dm" style="font-size: 11px; color: #DB2777; background: rgba(219,39,119,0.05); border: 1px solid rgba(219,39,119,0.15); border-radius: 6px; padding: 4px 12px; font-weight: 500;">IBM Watson</span>
+                    <span class="dm" style="font-size: 11px; color: #DB2777; background: rgba(219,39,119,0.05); border: 1px solid rgba(219,39,119,0.15); border-radius: 6px; padding: 4px 12px; font-weight: 500;">Python</span>
                 </div>
             </div>
 
-            <div class="reveal proj-card" style="border: 1px solid #A78BFA22;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+            <div class="reveal proj-card card-hover" style="border: 1px solid rgba(146,20,12,0.12);" id="proj-twin">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
                     <div>
-                        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: #F7FAFC; margin-bottom: 3px;">Bharat-Twin</h3>
-                        <p class="dm" style="font-size: 12px; color: #A78BFA; font-weight: 500;">Agentic Sovereign-AI Platform</p>
+                        <h3 class="syne" style="font-size: 17px; font-weight: 700; color: #0F172A; margin-bottom: 4px;">Bharat-Twin</h3>
+                        <p class="dm" style="font-size: 12px; color: #92140C; font-weight: 600;">Agentic Sovereign-AI Platform</p>
                     </div>
-                    <a href="https://github.com/Hackcode18" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: #A78BFA14; border: 1px solid #A78BFA30; border-radius: 8px; color: #A78BFA; flex-shrink: 0;">
+                    <a href="https://github.com/Hackcode18" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(146,20,12,0.04); border: 1px solid rgba(146,20,12,0.18); border-radius: 10px; color: #92140C; flex-shrink: 0;">
                         <i data-lucide="github" style="width: 15px; height: 15px;"></i>
                     </a>
                 </div>
-                <p class="dm" style="font-size: 13px; color: #94A3B8; line-height: 1.7; flex-grow: 1; margin-bottom: 18px;">
+                <p class="dm" style="font-size: 13px; color: #475569; line-height: 1.7; flex-grow: 1; margin-bottom: 20px; font-weight: 400;">
                     Architected a multi-agent LLM platform for sovereign AI use-cases with autonomous decision loops, dynamic task routing, and agent-to-agent communication.
                 </p>
                 <div style="margin-bottom: 16px;">
-                    <span class="dm" style="font-size: 11px; color: #566778;">Innovation Concept</span>
+                    <span class="dm" style="font-size: 11px; color: #64748B; font-weight: 500;">Innovation Concept</span>
                 </div>
                 <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-                    <span class="dm" style="font-size: 11px; color: #A78BFA; background: #A78BFA10; border: 1px solid #A78BFA25; border-radius: 6px; padding: 3px 10px; font-weight: 500;">LangChain</span>
-                    <span class="dm" style="font-size: 11px; color: #A78BFA; background: #A78BFA10; border: 1px solid #A78BFA25; border-radius: 6px; padding: 3px 10px; font-weight: 500;">Agentic AI</span>
-                </div>
-            </div>
-            
-            <div class="reveal proj-card" style="border: 1px solid #F6AD5522;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
-                    <div>
-                        <h3 class="syne" style="font-size: 16px; font-weight: 700; color: #F7FAFC; margin-bottom: 3px;">AI Resume Builder</h3>
-                        <p class="dm" style="font-size: 12px; color: #F6AD55; font-weight: 500;">Autonomous Agent System</p>
-                    </div>
-                    <a href="https://github.com/Hackcode18" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: #F6AD5514; border: 1px solid #F6AD5530; border-radius: 8px; color: #F6AD55; flex-shrink: 0;">
-                        <i data-lucide="github" style="width: 15px; height: 15px;"></i>
-                    </a>
-                </div>
-                <p class="dm" style="font-size: 13px; color: #94A3B8; line-height: 1.7; flex-grow: 1; margin-bottom: 18px;">
-                    Built autonomous agent pipeline for real-time JD-matching and gap analysis using LangChain and LLM APIs. Deployed on cloud infrastructure with structured output parsing.
-                </p>
-                <div style="margin-bottom: 16px;">
-                    <span class="dm" style="font-size: 11px; color: #566778;">IBM & Kaggle Capstone</span>
-                </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-                    <span class="dm" style="font-size: 11px; color: #F6AD55; background: #F6AD5510; border: 1px solid #F6AD5525; border-radius: 6px; padding: 3px 10px; font-weight: 500;">LLM APIs</span>
-                    <span class="dm" style="font-size: 11px; color: #F6AD55; background: #F6AD5510; border: 1px solid #F6AD5525; border-radius: 6px; padding: 3px 10px; font-weight: 500;">AWS Lambda</span>
+                    <span class="dm" style="font-size: 11px; color: #92140C; background: rgba(146,20,12,0.05); border: 1px solid rgba(146,20,12,0.15); border-radius: 6px; padding: 4px 12px; font-weight: 500;">LangChain</span>
+                    <span class="dm" style="font-size: 11px; color: #92140C; background: rgba(146,20,12,0.05); border: 1px solid rgba(146,20,12,0.15); border-radius: 6px; padding: 4px 12px; font-weight: 500;">Agentic AI</span>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Achievements Section -->
     <section id="achievements" style="padding-top: 0;">
         <div class="reveal dm section-label">
-            <div class="section-label-line" style="background: #F6AD55;"></div>
-            <span class="section-label-text" style="color: #F6AD55;">Achievements</span>
+            <div class="section-label-line" style="background: #D97706;"></div>
+            <span class="section-label-text" style="color: #D97706;">Achievements</span>
         </div>
         <h2 class="reveal syne section-title">Recognition & Awards</h2>
         
         <div class="grid-container">
-            <div class="reveal reveal-d1 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 20px; display: flex; gap: 14px; align-items: flex-start;">
-                <div style="font-size: 24px; flex-shrink: 0; line-height: 1;">🏆</div>
+            <div class="reveal reveal-d1 card-hover" style="padding: 24px; display: flex; gap: 16px; align-items: flex-start;">
+                <div style="font-size: 26px; flex-shrink: 0; line-height: 1;">🏆</div>
                 <div>
-                    <h4 class="syne" style="font-size: 14px; font-weight: 700; color: #F7FAFC; line-height: 1.35; margin-bottom: 6px;">Google DevFest 2025 — Winner</h4>
-                    <p class="dm" style="font-size: 12px; color: #566778; line-height: 1.55;">Top placement among national participants in the AI/ML innovation track.</p>
+                    <h4 class="syne" style="font-size: 15px; font-weight: 700; color: #0F172A; line-height: 1.4; margin-bottom: 6px;">Google DevFest 2025</h4>
+                    <p class="dm" style="font-size: 12px; color: #475569; line-height: 1.6; font-weight: 400;">Top placement among national participants in the AI/ML innovation track.</p>
                 </div>
             </div>
             
-            <div class="reveal reveal-d2 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 20px; display: flex; gap: 14px; align-items: flex-start;">
-                <div style="font-size: 24px; flex-shrink: 0; line-height: 1;">🥈</div>
+            <div class="reveal reveal-d2 card-hover" style="padding: 24px; display: flex; gap: 16px; align-items: flex-start;">
+                <div style="font-size: 26px; flex-shrink: 0; line-height: 1;">🥈</div>
                 <div>
-                    <h4 class="syne" style="font-size: 14px; font-weight: 700; color: #F7FAFC; line-height: 1.35; margin-bottom: 6px;">VNRVJIET Design-A-Thon 2026 — 2nd Prize ($10,000)</h4>
-                    <p class="dm" style="font-size: 12px; color: #566778; line-height: 1.55;">Merit Award for best end-to-end AI product design.</p>
-                </div>
-            </div>
-            
-            <div class="reveal reveal-d3 card-hover" style="background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 20px; display: flex; gap: 14px; align-items: flex-start;">
-                <div style="font-size: 24px; flex-shrink: 0; line-height: 1;">🏅</div>
-                <div>
-                    <h4 class="syne" style="font-size: 14px; font-weight: 700; color: #F7FAFC; line-height: 1.35; margin-bottom: 6px;">Merit Award — IIT Kanpur 2026</h4>
-                    <p class="dm" style="font-size: 12px; color: #566778; line-height: 1.55;">Recognised for research-driven problem-solving in the ML category.</p>
-                </div>
-            </div>
-            
-            <div class="reveal card-hover" style="grid-column: 1 / -1; background: rgba(246,173,85,.04); border: 1px solid rgba(246,173,85,.2); border-radius: 14px; padding: 20px; display: flex; gap: 14px; align-items: flex-start;">
-                <div style="font-size: 24px; flex-shrink: 0;">☁️</div>
-                <div>
-                    <h4 class="syne" style="font-size: 14px; font-weight: 700; color: #F7FAFC; margin-bottom: 8px;">Certifications</h4>
-                    <span class="dm" style="display: inline-block; font-size: 11px; color: #F6AD55; background: rgba(246,173,85,.1); border: 1px solid rgba(246,173,85,.25); border-radius: 100px; padding: 3px 10px; margin: 2px 4px 2px 0; font-weight: 500;">AWS SBCL</span>
-                    <span class="dm" style="display: inline-block; font-size: 11px; color: #F6AD55; background: rgba(246,173,85,.1); border: 1px solid rgba(246,173,85,.25); border-radius: 100px; padding: 3px 10px; margin: 2px 4px 2px 0; font-weight: 500;">Azure AI Fundamentals</span>
-                    <span class="dm" style="display: inline-block; font-size: 11px; color: #F6AD55; background: rgba(246,173,85,.1); border: 1px solid rgba(246,173,85,.25); border-radius: 100px; padding: 3px 10px; margin: 2px 4px 2px 0; font-weight: 500;">GCP Associate</span>
+                    <h4 class="syne" style="font-size: 15px; font-weight: 700; color: #0F172A; line-height: 1.4; margin-bottom: 6px;">VNR Designathon 2025 — 2nd Prize</h4>
+                    <p class="dm" style="font-size: 12px; color: #475569; line-height: 1.6; font-weight: 400;">National level 24-hour hackathon award won in the Cybersecurity domain.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact" style="padding-top: 0;">
-        <div style="background: rgba(59,158,219,.04); border: 1px solid rgba(59,158,219,.15); border-radius: 20px; padding: 48px; text-align: center;">
+        <div style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 20px; padding: 48px 24px; text-align: center; box-shadow: 0 4px 24px rgba(148, 163, 184, 0.04);">
             <div class="reveal dm section-label" style="justify-content: center;">
-                <div class="section-label-line" style="background: #3B9EDB;"></div>
-                <span class="section-label-text" style="color: #3B9EDB;">Get In Touch</span>
+                <div class="section-label-line" style="background: #DB2777;"></div>
+                <span class="section-label-text" style="color: #DB2777;">Get In Touch</span>
             </div>
-            <h2 class="syne reveal" style="font-size: clamp(26px, 4vw, 38px); font-weight: 700; color: #F7FAFC; margin-bottom: 14px;">Let's Connect</h2>
-            <p class="dm reveal" style="color: #94A3B8; font-size: 15px; max-width: 480px; margin: 0 auto 36px; line-height: 1.7;">
+            <h2 class="syne reveal" style="font-size: clamp(24px, 3.8vw, 36px); font-weight: 700; color: #0F172A; margin-bottom: 14px; letter-spacing: -0.01em;">Let's Connect</h2>
+            <p class="dm reveal" style="color: #475569; font-size: 15px; max-width: 500px; margin: 0 auto 36px; line-height: 1.7; font-weight: 400;">
                 Open to ML research collaborations, internship opportunities, and Amazon ML Summer School connections.
             </p>
             <div class="reveal" style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-                <a href="mailto:shikaramruthika@gmail.com" class="btn-secondary dm" style="border: 1px solid #3B9EDB40; color: #3B9EDB; background: #3B9EDB08; border-radius: 10px;">
+                <a href="mailto:shikaramruthika@gmail.com" class="btn-secondary dm" style="border: 1px solid rgba(219,39,119,0.25); color: #DB2777; background: rgba(219,39,119,0.03); border-radius: 10px;">
                     <i data-lucide="mail" style="width: 16px; height: 16px;"></i> shikaramruthika@gmail.com
                 </a>
-                <a href="https://linkedin.com/in/shikaramruthika" target="_blank" class="btn-secondary dm" style="border: 1px solid #0A66C240; color: #0A66C2; background: #0A66C208; border-radius: 10px;">
+                <a href="https://linkedin.com/in/shikaramruthika" target="_blank" class="btn-secondary dm" style="border: 1px solid rgba(146,20,12,0.2); color: #92140C; background: rgba(146,20,12,0.03); border-radius: 10px;">
                     <i data-lucide="linkedin" style="width: 16px; height: 16px;"></i> LinkedIn
-                </a>
-                <a href="https://github.com/Hackcode18" target="_blank" class="btn-secondary dm" style="border: 1px solid #A78BFA40; color: #A78BFA; background: #A78BFA08; border-radius: 10px;">
-                    <i data-lucide="github" style="width: 16px; height: 16px;"></i> Hackcode18
                 </a>
             </div>
         </div>
     </section>
 
-    <footer style="border-top: 1px solid rgba(255,255,255,.06); padding: 24px; text-align: center;">
-        <p class="dm" style="font-size: 12px; color: #566778;">
-            Shikaram Ruthika · 2026 ·
-            <a href="https://github.com/Hackcode18" target="_blank" style="color: #3B9EDB; text-decoration: none; margin-left: 6px;">github.com/Hackcode18</a>
+    <!-- Footer Space -->
+    <footer style="border-top: 1px solid rgba(148,163,184,0.2); padding: 24px 24px; text-align: center;">
+        <p class="dm" style="font-size: 12px; color: #64748B; letter-spacing: 0.02em; font-weight: 500;">
+            Shikaram Ruthika · 2026
         </p>
     </footer>
 
     <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Reveal Animations on Scroll
-        const observer = new IntersectionObserver(entries => {
+        const commentBox = document.getElementById("commentBox");
+        let activeElementId = "";
+
+        // Context Tracker Map containing behind-the-scenes engineering challenges & tasks
+        const journeyNarratives = [
+            {
+                triggerId: "heroSpace",
+                text: "Hey! I'm Ruthika. I designed this space to show how I build AI. Ready to see the behind-the-scenes engineering work? Let's scroll down! 👇"
+            },
+            {
+                triggerId: "about",
+                text: "My core goal? Building system-level AI that matters. I focus intensely on bridging theoretical Machine Learning research with production-grade full-stack execution."
+            },
+            {
+                triggerId: "education",
+                text: "Studying B.Tech IT at KITSW! Maintaining a 8.24 CGPA while driving real-world AI initiatives keeps things moving pretty fast, but I love the pace. ⚡"
+            },
+            {
+                triggerId: "skills",
+                text: "I work deeply with PyTorch, LangChain, and cloud-native services like AWS SageMaker. Scaling AI models efficiently across infrastructures is my bread and butter."
+            },
+            {
+                triggerId: "exp-aws",
+                text: "As an incoming AWS Lead, I'm organizing hands-on community workshops. The goal is to demystify complex cloud-native pipelines and serverless ML architecture for student builders!"
+            },
+            {
+                triggerId: "exp-nit",
+                text: "At NIT Warangal, I designed robust NLP data pipelines for Multilingual TTS. **The Challenge:** Handling multi-accented dataset variance. **What I faced:** Pronunciation alignment drops. I had to build custom filtering hooks to ensure synthesis clarity across regional languages."
+            },
+            {
+                triggerId: "exp-msft",
+                text: "During my Microsoft program, I deployed enterprise LLM patterns with Responsible AI guardrails. **What I faced:** Strict enterprise constraints meant standard APIs would randomly drift or hallucinate under complex system requests. I built strict JSON schemas and evaluation loops to fix it."
+            },
+            {
+                triggerId: "proj-h2o",
+                text: "For H2O Guardian, I led the architecture of an IBM Watson-powered RAG framework. **The Challenge:** Real-time semantic retrieval from unstructured data sources. **What I faced:** High prompt latency and embedding collisions. I re-indexed our vector stores and tuned context window chunk-sizes to solve it."
+            },
+            {
+                triggerId: "proj-twin",
+                text: "Bharat-Twin was a challenge in multi-agent orchestration. **What I faced:** Infinite decision loops and race conditions between competing AI agents. I implemented structural priority routers and explicit task termination conditions to keep execution linear."
+            },
+            {
+                triggerId: "achievements",
+                text: "Winning DevFest 2025 and placing 2nd at the national VNR Designathon validated my approach: blending core technical research with viable product architecture."
+            },
+            {
+                triggerId: "contact",
+                text: "Let's connect! I'm fully geared up to talk ML architecture, engineering research, or collaborations. Drop an email or ping my LinkedIn! 📬"
+            }
+        ];
+
+        // Trigger manual tap bubble action
+        function triggerGreeting() {
+            commentBox.textContent = "I'm scrolling down right along with you to give you the honest context behind my projects! 🚀";
+            commentBox.classList.add("show");
+        }
+
+        // Initialize high-performance unified intersection observer framework
+        const revealObserver = new IntersectionObserver(entries => {
             entries.forEach(e => { 
                 if (e.isIntersecting) {
                     e.target.classList.add("vis");
                 } 
             });
-        }, { threshold: 0.08 });
+        }, { threshold: 0.04, rootMargin: "0px 0px -20px 0px" });
 
-        setTimeout(() => {
-            document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-        }, 100);
+        // Companion contextual narration execution tracking logic
+        const companionObserver = new IntersectionObserver(entries => {
+            let mostVisible = null;
+            let maxRatio = 0;
 
-        // Navigation Background Color Change on Scroll
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+                    maxRatio = entry.intersectionRatio;
+                    mostVisible = entry.target;
+                }
+            });
+
+            if (mostVisible) {
+                const match = journeyNarratives.find(n => n.triggerId === mostVisible.id);
+                if (match && activeElementId !== match.triggerId) {
+                    activeElementId = match.triggerId;
+                    
+                    // Bubble animation transition sequence
+                    commentBox.classList.remove("show");
+                    setTimeout(() => {
+                        commentBox.textContent = match.text;
+                        commentBox.classList.add("show");
+                    }, 200);
+                }
+            }
+        }, {
+            threshold: [0.1, 0.3, 0.5],
+            rootMargin: "-15% 0px -40% 0px"
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Observe items for revealing animation
+            document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+            
+            // Observe sections and target nodes for contextual human sketch commentaries
+            journeyNarratives.forEach(item => {
+                const el = document.getElementById(item.triggerId);
+                if (el) companionObserver.observe(el);
+            });
+
+            // Initial delay reveal for the speech bubble on layout load
+            setTimeout(() => {
+                if(!activeElementId) commentBox.classList.add("show");
+            }, 800);
+        });
+
+        // Navigation Transform Action
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
+            if (window.scrollY > 25) {
                 navbar.classList.add('nav-scrolled');
             } else {
                 navbar.classList.remove('nav-scrolled');
             }
         });
 
-        // Active Section Highlighting in Nav
+        // Tracking active nav-links highlighting loop hooks
         const sections = document.querySelectorAll("section[id]");
         const navLinks = document.querySelectorAll(".nav-link");
 
@@ -655,7 +849,7 @@
                     });
                 }
             });
-        }, { threshold: 0.25 });
+        }, { threshold: 0.18, rootMargin: "-10% 0px -65% 0px" });
 
         sections.forEach(section => sectionObserver.observe(section));
     </script>
